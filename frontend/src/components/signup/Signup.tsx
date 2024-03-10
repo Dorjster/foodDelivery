@@ -9,6 +9,7 @@ import { InputField } from "./Input";
 import { InputPassword } from "./InputP";
 import { useState } from "react";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
 type fieldsType = {};
 
@@ -42,7 +43,7 @@ export const SignUp = () => {
     password2: "",
   });
   const [error, setError] = useState<string>();
-
+  const { push } = useRouter();
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setUserdata({ ...userdata, [name]: value });
@@ -61,6 +62,7 @@ export const SignUp = () => {
         userdata
       );
       console.log(data);
+      push("/");
     } catch (err: any) {
       console.log(err);
       setError(err.response.data);
