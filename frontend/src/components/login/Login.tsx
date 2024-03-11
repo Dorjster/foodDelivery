@@ -69,7 +69,20 @@ export const Login = () => {
             name="password"
             onchange={(e) => handleChange(e)}
           />
-          <Box sx={{ width: "100%", textAlign: "right" }}>Нууц үг сэргээх</Box>
+          <Button
+            onClick={() => push("/recoverPassword")}
+            sx={{
+              width: "40%",
+              fontSize: "10x",
+              textAlign: "start",
+              cursor: "pointer",
+              display: "flex",
+              alignSelf: "flex-end",
+              color: "black",
+            }}
+          >
+            Forgot password?
+          </Button>
           {error && (
             <Box
               sx={{
@@ -92,22 +105,24 @@ export const Login = () => {
             sx={{
               height: "48px",
               width: "100%",
-              backgroundColor: "#18BA51",
-              color: "black",
+              backgroundColor: "#EEEFF2",
+              color: "#1C20243D",
+              border: "none",
+              cursor: "pointer",
             }}
           >
             Нэвтрэх
           </Button>
           <Box>Эсвэл</Box>
           <Button
-            onClick={() => push("/signUp")}
+            onClick={() => push("/signup")}
             variant="outlined"
             sx={{
               height: "48px",
               width: "100%",
               backgroundColor: "white",
-              border: "2px solid",
-              borderColor: "green",
+              border: "1px solid ",
+              borderColor: "#18BA51",
               color: "black",
             }}
           >

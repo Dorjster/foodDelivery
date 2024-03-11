@@ -12,7 +12,7 @@ export const loginUserQuery = async (req: Request) => {
   try {
     const user = await getUSerByEmail(email);
     if (!user) {
-      throw new Error("User not found");
+      return "User not found";
     }
     console.log(user);
 
