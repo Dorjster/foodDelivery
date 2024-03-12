@@ -44,7 +44,10 @@ export const passwordRecovery = async (req: Request) => {
         console.log("Email sent:", info.response);
       }
     });
-
+    const updatedUser = await userModel.findOneAndUpdate(
+      { email: user.email },
+      { $set: { otp: token } }
+    );
     return token;
   } catch (error: any) {
     throw new Error(error.message);

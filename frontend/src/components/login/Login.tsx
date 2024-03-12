@@ -23,8 +23,14 @@ export const Login = () => {
         "http://localhost:8000/login",
         userdata
       );
-      console.log(data);
-      push("/");
+      if (data === "User not found") {
+        setError("User not found");
+      } else if (data === "Incorrect email or password") {
+        setError("Incorrect email or password");
+      } else {
+        setError("");
+        push("/");
+      }
     } catch (err: any) {
       console.log(err.response.data);
       setError(err.response.data);
@@ -87,7 +93,7 @@ export const Login = () => {
             <Box
               sx={{
                 color: "red",
-                fontFamily: "fantasy",
+
                 width: "100%",
                 textAlign: "center",
                 position: "absolute",

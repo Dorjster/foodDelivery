@@ -7,7 +7,10 @@ import Image from "next/image";
 import { Container } from "postcss";
 
 import { HeaderRight } from "./HeadR";
+import { Button } from "@mui/material";
+import { useRouter } from "next/navigation";
 export const Header = () => {
+  const { push } = useRouter();
   return (
     <Grid
       container
@@ -40,7 +43,16 @@ export const Header = () => {
             marginBottom: "17px",
           }}
         >
-          <Box>НҮҮР</Box>
+          <Button
+            onClick={() => {
+              push("/");
+            }}
+            sx={{
+              color: "black",
+            }}
+          >
+            НҮҮР
+          </Button>
         </Grid>
         <Grid
           item
@@ -48,7 +60,16 @@ export const Header = () => {
             marginBottom: "17px",
           }}
         >
-          <Box>ХООЛНЫ ЦЭС</Box>
+          <Button
+            onClick={() => {
+              push("/");
+            }}
+            sx={{
+              color: "black",
+            }}
+          >
+            Хоолны цэс
+          </Button>
         </Grid>
         <Grid
           item
@@ -56,7 +77,16 @@ export const Header = () => {
             marginBottom: "17px",
           }}
         >
-          <Box>ХҮРГЭЛТИЙН БҮС</Box>
+          <Button
+            onClick={() => {
+              push("/");
+            }}
+            sx={{
+              color: "black",
+            }}
+          >
+            Хүргэлтийн бүс
+          </Button>
         </Grid>
       </Grid>
       <Grid>

@@ -1,3 +1,5 @@
+"use client";
+
 import * as React from "react";
 import Paper from "@mui/material/Paper";
 import InputBase from "@mui/material/InputBase";
@@ -5,11 +7,17 @@ import Box from "@mui/material/Box";
 
 import IconButton from "@mui/material/IconButton";
 import { Search } from "@mui/icons-material";
-import { Grid, Stack } from "@mui/material";
+import { Button, Grid, Stack } from "@mui/material";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import ShoppingBasketOutlinedIcon from "@mui/icons-material/ShoppingBasketOutlined";
+import { useRouter } from "next/navigation";
 
 export const HeaderRight = () => {
+  const { push } = useRouter();
+
+  const handlePush = () => {
+    push("/login");
+  };
   return (
     <Grid
       sx={{
@@ -78,7 +86,12 @@ export const HeaderRight = () => {
         }}
       >
         <PersonOutlineIcon sx={{ fontSize: "30px" }} />
-        <Grid sx={{ fontWeight: "700px" }}>Нэвтрэх</Grid>
+        <Button
+          onClick={handlePush}
+          sx={{ fontWeight: "700px", color: "black", padding: "5px" }}
+        >
+          Нэвтрэх
+        </Button>
       </Stack>
     </Grid>
   );

@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "asaa": "nodemon index.ts"
+    "as": "nodemon index.ts"
   },
   "keywords": [],
   "author": "",

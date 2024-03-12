@@ -1,10 +1,23 @@
-"use client";
+// PasswordRec.tsx
 import React, { ChangeEvent, useState } from "react";
 import { Stack, Box, Button } from "@mui/material";
 import axios from "axios";
+import { useRouter } from "next/navigation";
+
+interface UserData {
+  email: string;
+  otp: string;
+  newPassword: string;
+}
 
 export const PasswordRec = () => {
-  const [userdata, setUserdata] = useState({});
+  const { push } = useRouter();
+  const [page, setPage] = useState(1);
+  const [userdata, setUserdata] = useState<UserData>({
+    email: "",
+    otp: "",
+    newPassword: "",
+  });
   const [error, setError] = useState<string | null>(null);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -12,22 +25,62 @@ export const PasswordRec = () => {
     setUserdata({ ...userdata, [name]: value });
   };
 
-  const handleClick = async () => {
+  const handleSendOTP = async () => {
     try {
-      const { data } = await axios.post(
+      const { data } = await axios.post<string>(
         "http://localhost:8000/forgot-password",
-        userdata
+        { email: userdata.email }
       );
       console.log(data);
       if (data === "User not found") {
         setError("User not found");
       } else {
         setError(null);
+        setPage(2); // Move to page 2
       }
     } catch (err: any) {
       console.error(err.response.data);
       setError(err.response.data);
     }
+  };
+
+  const handleVerifyOTP = async () => {
+    try {
+      const { data } = await axios.post<string>(
+        "http://localhost:8000/check-code",
+        { email: userdata.email, code: userdata.otp }
+      );
+      console.log(data);
+      if (data === "success") {
+        setError(null);
+        setPage(3); // Move to page 3
+      } else {
+        setError("Invalid OTP code");
+      }
+    } catch (err: any) {
+      console.error(err.response.data);
+      setError(err.response.data);
+    }
+  };
+
+  const handleUpdatePassword = async () => {
+    try {
+      const { data } = await axios.post<string>(
+        "http://localhost:8000/updatePass",
+        { email: userdata.email, password: userdata.newPassword }
+      );
+      console.log(data);
+
+      alert("Password updated successfully!");
+      push("/login");
+    } catch (err: any) {
+      console.error(err.response.data);
+      setError(err.response.data);
+    }
+  };
+
+  const handleBack = () => {
+    setPage(page - 1);
   };
 
   return (
@@ -45,48 +98,180 @@ export const PasswordRec = () => {
           fontFamily: "sans-serif",
         }}
       >
-        <Box
-          sx={{
-            width: "100%",
-            textAlign: "center",
-            fontSize: "24px",
-            fontWeight: "bold",
-          }}
-        >
-          Нууц үг сэргээх
-        </Box>
-        <Stack sx={{ gap: "10px", position: "relative" }}>
-          <input
-            type="text"
-            placeholder="Имэйл хаягаа оруулна уу"
-            name="email"
-            onChange={handleChange}
-            style={{
-              width: "95%",
-              height: "50px",
-              fontSize: "17px",
-              paddingLeft: "20px",
-            }}
-          />
-          {error && (
+        {page === 1 && (
+          <>
             <Box
               sx={{
-                color: "red",
-
                 width: "100%",
                 textAlign: "center",
-                position: "absolute",
-                top: "68px",
-                marginBottom: "-48px",
+                fontSize: "24px",
+                fontWeight: "bold",
               }}
             >
-              {error}
+              Нууц үг сэргээх
             </Box>
-          )}
-        </Stack>
-        <Stack alignItems={"center"} sx={{ gap: "32px" }}>
+            <Stack sx={{ gap: "10px", position: "relative" }}>
+              <input
+                type="text"
+                placeholder="Имэйл хаягаа оруулна уу"
+                name="email"
+                value={userdata.email}
+                onChange={handleChange}
+                style={{
+                  width: "95%",
+                  height: "50px",
+                  fontSize: "17px",
+                  paddingLeft: "20px",
+                }}
+              />
+              {error && (
+                <Box
+                  sx={{
+                    color: "red",
+                    width: "100%",
+                    textAlign: "center",
+                    position: "absolute",
+                    top: "68px",
+                    marginBottom: "-48px",
+                  }}
+                >
+                  {error}
+                </Box>
+              )}
+            </Stack>
+            <Button
+              onClick={handleSendOTP}
+              variant="outlined"
+              sx={{
+                height: "48px",
+                width: "100%",
+                backgroundColor: "#EEEFF2",
+                color: "#1C20243D",
+                border: "none",
+                cursor: "pointer",
+              }}
+            >
+              Үргэлжлүүлэх
+            </Button>
+          </>
+        )}
+        {page === 2 && (
+          <>
+            <Box
+              sx={{
+                width: "100%",
+                textAlign: "center",
+                fontSize: "24px",
+                fontWeight: "bold",
+              }}
+            >
+              ОТР код оруулна уу
+            </Box>
+            <Stack sx={{ gap: "10px", position: "relative" }}>
+              <input
+                type="text"
+                placeholder="ОТР код оруулна уу"
+                name="otp"
+                value={userdata.otp}
+                onChange={handleChange}
+                style={{
+                  width: "95%",
+                  height: "50px",
+                  fontSize: "17px",
+                  paddingLeft: "20px",
+                }}
+              />
+              {error && (
+                <Box
+                  sx={{
+                    color: "red",
+                    width: "100%",
+                    textAlign: "center",
+                    position: "absolute",
+                    top: "68px",
+                    marginBottom: "-48px",
+                  }}
+                >
+                  {error}
+                </Box>
+              )}
+            </Stack>
+            <Button
+              onClick={handleVerifyOTP}
+              variant="outlined"
+              sx={{
+                height: "48px",
+                width: "100%",
+                backgroundColor: "#EEEFF2",
+                color: "#1C20243D",
+                border: "none",
+                cursor: "pointer",
+              }}
+            >
+              Дараах
+            </Button>
+          </>
+        )}
+        {page === 3 && (
+          <>
+            <Box
+              sx={{
+                width: "100%",
+                textAlign: "center",
+                fontSize: "24px",
+                fontWeight: "bold",
+              }}
+            >
+              Имэйл амжилттай шинэчлэгдлээ
+            </Box>
+            <Stack sx={{ gap: "10px", position: "relative" }}>
+              <input
+                type="password"
+                placeholder="Шинэ нууц үг"
+                name="newPassword"
+                value={userdata.newPassword}
+                onChange={handleChange}
+                style={{
+                  width: "95%",
+                  height: "50px",
+                  fontSize: "17px",
+                  paddingLeft: "20px",
+                }}
+              />
+              {error && (
+                <Box
+                  sx={{
+                    color: "red",
+                    width: "100%",
+                    textAlign: "center",
+                    position: "absolute",
+                    top: "68px",
+                    marginBottom: "-48px",
+                  }}
+                >
+                  {error}
+                </Box>
+              )}
+            </Stack>
+            <Button
+              onClick={handleUpdatePassword}
+              variant="outlined"
+              sx={{
+                height: "48px",
+                width: "100%",
+                backgroundColor: "#EEEFF2",
+                color: "#1C20243D",
+                border: "none",
+                cursor: "pointer",
+              }}
+            >
+              Нууц үг солих
+            </Button>
+          </>
+        )}
+        {page !== 1 && (
           <Button
-            onClick={handleClick}
+            onClick={handleBack}
             variant="outlined"
             sx={{
               height: "48px",
@@ -97,9 +282,9 @@ export const PasswordRec = () => {
               cursor: "pointer",
             }}
           >
-            Үргэлжлүүлэх
+            Буцах
           </Button>
-        </Stack>
+        )}
       </Stack>
     </Stack>
   );
