@@ -2,7 +2,7 @@
 import React, { ChangeEvent } from "react";
 import { Stack, Box, Paper, InputBase, Button } from "@mui/material";
 import { InputField } from "../signup/Input";
-import { InputPassword } from "../signup/InputP";
+import { InputPass } from "../signup/InputP";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
@@ -70,7 +70,7 @@ export const Login = () => {
             name="email"
             onchange={(el: ChangeEvent<HTMLInputElement>) => handleChange(el)}
           />
-          <InputPassword
+          <InputPass
             text="Нууц үг"
             name="password"
             onchange={(e) => handleChange(e)}

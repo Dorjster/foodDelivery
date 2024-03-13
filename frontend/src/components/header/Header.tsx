@@ -30,7 +30,7 @@ export const Header = () => {
           display: "flex",
           alignItems: "center",
           // justifyContent: "space-between",
-          gap: "80px",
+          gap: "10px",
           marginTop: "10px",
           fontFamily: "sans-serif",
           fontWeight: "600",

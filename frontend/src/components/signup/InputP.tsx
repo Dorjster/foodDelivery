@@ -22,7 +22,7 @@ type InputPasswordProps = {
   onchange: (even: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-export const InputPassword = (props: InputPasswordProps) => {
+export const InputPass = (props: InputPasswordProps) => {
   const { text, name, onchange } = props;
   const [showPassword, setShowPassword] = useState(false);
 
@@ -34,7 +34,6 @@ export const InputPassword = (props: InputPasswordProps) => {
     <Stack sx={{ mt: "20px" }}>
       <Box sx={{ fontFamily: "sans-serif", mb: "10px" }}>{text}</Box>
       <FormControl sx={{ mb: 1 }} fullWidth variant="outlined">
-        {/* <InputLabel htmlFor="outlined-adornment-password">{text}</InputLabel> */}
         <OutlinedInput
           sx={{
             backgroundColor: "#F5F5F5",

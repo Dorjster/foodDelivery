@@ -10,7 +10,7 @@ const page = () => {
   };
   return (
     <div className="w-full h-screen flex justify-center ">
-      {step === 0 && <PasswordRec stage={step} nextHandle={handleNext} />}
+      {step === 0 && <PasswordRec />}
       {/* {step === 1 && <SignUpSecond stage={step} nextHandle={handleNext} />}
       {step === 2 && <SignUpThird stage={step} nextHandle={handleNext} />}
       {step === 3 && <SignUpFinal stage={step} />} */}

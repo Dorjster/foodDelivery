@@ -21,7 +21,6 @@ export const loginUserQuery = async (req: Request) => {
     }
 
     const token = await tokenCreate(user._id.toString());
-    console.log(token);
 
     return token;
   } catch (error: any) {

@@ -5,12 +5,13 @@ import { Stack, Box } from "@mui/material";
 import FacebookOutlinedIcon from "@mui/icons-material/FacebookOutlined";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import TwitterIcon from "@mui/icons-material/Twitter";
+import { CenterFocusStrong } from "@mui/icons-material";
 
 export const Footer = () => {
   return (
     <Stack
       sx={{
-        width: "100%",
+        width: "100vw",
         height: "545px",
         position: "relative",
         backgroundImage: "url(/foo.png)",
@@ -23,6 +24,7 @@ export const Footer = () => {
           width: "80%",
           top: "50%",
           left: "50%",
+
           transform: "translate(-50%, -50%)",
           justifyContent: "space-between",
         }}

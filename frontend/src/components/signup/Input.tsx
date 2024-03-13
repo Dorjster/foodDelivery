@@ -3,7 +3,6 @@ import React from "react";
 import Paper from "@mui/material/Paper";
 import InputBase from "@mui/material/InputBase";
 import { Grid } from "@mui/material";
-import Box from "@mui/material";
 
 type inputFieldType = {
   placeHolder: string;
@@ -45,7 +44,6 @@ export const InputField = (props: inputFieldType) => {
           placeholder={placeHolder}
           name={name}
           inputProps={{ "aria-label": "" }}
-          // onChange={(e: React.FormEvent<HTMLInputElement>) => handleChange(e)}
           onChange={onchange}
         />
       </Paper>

@@ -7,7 +7,6 @@ export const createUserQuery = async (req: Request) => {
     const { name, email, phone, password } = req.body;
 
     const hash = passwordHash(password);
-    
 
     const user = await userModel.create({
       name,

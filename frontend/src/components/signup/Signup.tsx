@@ -6,7 +6,7 @@ import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import { Grid, Stack, Button, Checkbox, colors } from "@mui/material";
 import { InputField } from "./Input";
-import { InputPassword } from "./InputP";
+import { InputPass } from "./InputP";
 import { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
@@ -16,7 +16,7 @@ type fieldsType = {};
 const fields = [
   { title: "Нэр", name: "name", placeHolder: "Нэрээ оруулна уу" },
   { title: "И-Мэйл", name: "email", placeHolder: "И-мэйл хаягаа оруулна уу" },
-  { title: "Утас", name: "phone", placeHolder: "Та хаягаа оруулна уу" },
+  { title: "Утас", name: "phone", placeHolder: "Дугаараа оруулна уу" },
 ];
 const fieldForPassword = [
   { title: "Нууц үг", name: "password", placeHolder: "Нууц үгээ оруулна уу" },
@@ -54,15 +54,22 @@ export const SignUp = () => {
     e.preventDefault();
 
     try {
-      if (userdata.password !== userdata.password2) {
-        setError("Passwords do not match");
-      }
-      const { data } = await axios.post(
-        "http://localhost:8000/signup",
-        userdata
+      const emptyFields = Object.entries(userdata).filter(
+        ([key, value]) => !value.trim()
       );
-      console.log(data);
-      push("/");
+      if (emptyFields.length > 0) {
+        setError("Please fill in all fields");
+      } else {
+        if (userdata.password !== userdata.password2) {
+          setError("Passwords do not match");
+        }
+        const { data } = await axios.post(
+          "http://localhost:8000/signup",
+          userdata
+        );
+        console.log(data);
+        push("/");
+      }
     } catch (err: any) {
       console.log(err);
       setError(err.response.data);
@@ -70,7 +77,7 @@ export const SignUp = () => {
   };
 
   return (
-    <Grid sx={{}}>
+    <Stack sx={{}}>
       <Grid
         display={"flex"}
         justifyContent={"center"}
@@ -113,7 +120,7 @@ export const SignUp = () => {
               />
             ))}
             {fieldForPassword.map((field, index) => (
-              <InputPassword
+              <InputPass
                 key={index}
                 text={field.title}
                 name={field.name}
@@ -129,7 +136,7 @@ export const SignUp = () => {
                   textAlign: "center",
                   color: "red",
                   width: "100%",
-                  fontFamily: "fantasy",
+                  fontFamily: "sans-serif",
                 }}
               >
                 {error}
@@ -155,9 +162,6 @@ export const SignUp = () => {
           </Stack>
         </Grid>
       </Grid>
-    </Grid>
+    </Stack>
   );
 };
-// export const LoginLayout = ({ children }: { children: React.ReactNode }) => {
-//   return <div>{children}</div>;
-// };

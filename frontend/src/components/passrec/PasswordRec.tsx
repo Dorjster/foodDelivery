@@ -1,4 +1,3 @@
-// PasswordRec.tsx
 import React, { ChangeEvent, useState } from "react";
 import { Stack, Box, Button } from "@mui/material";
 import axios from "axios";
@@ -36,7 +35,7 @@ export const PasswordRec = () => {
         setError("User not found");
       } else {
         setError(null);
-        setPage(2); // Move to page 2
+        setPage(2);
       }
     } catch (err: any) {
       console.error(err.response.data);
@@ -53,7 +52,7 @@ export const PasswordRec = () => {
       console.log(data);
       if (data === "success") {
         setError(null);
-        setPage(3); // Move to page 3
+        setPage(3);
       } else {
         setError("Invalid OTP code");
       }
