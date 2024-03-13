@@ -67,12 +67,36 @@ export const Footer = () => {
               fontFamily: "sans-serif",
             }}
           >
-            <Box sx={{ textDecoration: "underline" }}>Нүүр </Box>
-            <Box sx={{ textDecoration: "underline" }}>Холбоо барих</Box>
-            <Box sx={{ textDecoration: "underline" }}>Хоолны цэс</Box>
-            <Box sx={{ textDecoration: "underline" }}>Үйлчилгээний нөхцөл</Box>
-            <Box sx={{ textDecoration: "underline" }}>Хүргэлтийн бүс</Box>
-            <Box sx={{ textDecoration: "underline" }}>Нууцлалын бодлого</Box>
+            <Box
+              sx={{ textDecoration: "underline", textUnderlineOffset: "5px" }}
+            >
+              Нүүр{" "}
+            </Box>
+            <Box
+              sx={{ textDecoration: "underline", textUnderlineOffset: "5px" }}
+            >
+              Холбоо барих
+            </Box>
+            <Box
+              sx={{ textDecoration: "underline", textUnderlineOffset: "5px" }}
+            >
+              Хоолны цэс
+            </Box>
+            <Box
+              sx={{ textDecoration: "underline", textUnderlineOffset: "5px" }}
+            >
+              Үйлчилгээний нөхцөл
+            </Box>
+            <Box
+              sx={{ textDecoration: "underline", textUnderlineOffset: "5px" }}
+            >
+              Хүргэлтийн бүс
+            </Box>
+            <Box
+              sx={{ textDecoration: "underline", textUnderlineOffset: "5px" }}
+            >
+              Нууцлалын бодлого
+            </Box>
           </Box>
           <Box
             sx={{
@@ -87,10 +111,16 @@ export const Footer = () => {
           </Box>
         </Stack>
         <Stack
-          sx={{ color: "white", fontFamily: "sans-serif", textAlign: "center" }}
+          sx={{
+            color: "white",
+            fontFamily: "sans-serif",
+            textAlign: "center",
+          }}
         >
           <Box>© 2024 Pinecone Foods LLC </Box>{" "}
-          <Box>Зохиогчийн эрх хуулиар хамгаалагдсан.</Box>
+          <Box sx={{ fontWeight: "100" }}>
+            Зохиогчийн эрх хуулиар хамгаалагдсан.
+          </Box>
         </Stack>
       </Stack>
     </Stack>
