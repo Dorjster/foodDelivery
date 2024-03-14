@@ -1,8 +1,8 @@
-import { Request, Response } from "express";
-import { userModel } from "../../db/models/user";
-import { passwordHash } from "../../utils";
+import { Request } from "express";
+import { userModel, UserModelType } from "../../db/models/user";
+import { passwordHash, tokenCreate } from "../../utils";
 
-export const createUserQuery = async (req: Request) => {
+export const createUserQuery = async (req: Request): Promise<string> => {
   try {
     const { name, email, phone, password } = req.body;
 
@@ -14,7 +14,14 @@ export const createUserQuery = async (req: Request) => {
       phone,
       password: hash,
     });
-    return user;
+
+    if (!user) {
+      throw new Error("User creation failed");
+    }
+
+    const token = await tokenCreate(user._id.toString());
+
+    return token;
   } catch (error: any) {
     throw new Error(error.message);
   }

@@ -3,6 +3,7 @@ import { Footer } from "../components/footer/Footer";
 import { Header } from "../components/header/Header";
 
 import "./globals.css";
+import { DataProvider } from "@/context/dataProvider";
 
 export const metadata: Metadata = {
   title: "Food fucking Delivery",
@@ -19,10 +20,11 @@ export default function RootLayout({
       <body>
         <div>
           <div className="px-[20px] md:px-[120px]">
-            <Header />
-            {children}
+            <DataProvider>
+              <Header />
+              {children} <Footer />
+            </DataProvider>
           </div>
-          <Footer />
         </div>
       </body>
     </html>

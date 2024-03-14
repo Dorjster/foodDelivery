@@ -6,8 +6,9 @@ import { InputPass } from "../signup/InputP";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
-
+import { useData } from "../../context/dataProvider";
 export const Login = () => {
+  const { userData } = useData();
   const [userdata, setUserdata] = useState({});
   const [error, setError] = useState("");
   const { push } = useRouter();
@@ -15,8 +16,8 @@ export const Login = () => {
   const handleChange = (el: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = el.target;
     setUserdata({ ...userdata, [name]: value });
-    console.log(userdata);
   };
+
   const handleClick = async () => {
     try {
       const { data } = await axios.post(
@@ -29,6 +30,7 @@ export const Login = () => {
         setError("Incorrect email or password");
       } else {
         setError("");
+        localStorage.setItem(`tokenFood`, data);
         push("/");
       }
     } catch (err: any) {

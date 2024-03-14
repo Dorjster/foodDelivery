@@ -10,6 +10,7 @@ import { InputPass } from "./InputP";
 import { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { useData } from "../../context/dataProvider";
 
 type fieldsType = {};
 
@@ -35,6 +36,8 @@ type stateType = {
   password2: string;
 };
 export const SignUp = () => {
+  const { userData } = useData();
+
   const [userdata, setUserdata] = useState<stateType>({
     name: "",
     email: "",
