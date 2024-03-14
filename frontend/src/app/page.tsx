@@ -30,10 +30,6 @@ export default function Home() {
           }}
         >
           <Deatch />
-          <Offsale />
-          <Foods title="Үндсэн хоол" />
-          <Foods title="Салад ба зууш" />
-          <Foods title="Амттан" />
         </div>
       </Stack>
     </Stack>

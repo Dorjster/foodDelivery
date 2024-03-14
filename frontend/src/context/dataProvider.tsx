@@ -12,6 +12,8 @@ import { useRouter } from "next/navigation";
 interface UserData {
   id: number;
   name: string;
+  phone: string;
+  email: string;
 }
 
 interface RecordInput {
@@ -61,15 +63,16 @@ export const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
 
           setUserData(data);
           console.log(data);
+          return data;
         } catch (error) {
           console.error("Error getting user data:", error);
           localStorage.removeItem("tokenFood");
-          // push("/login");
+          push("/login");
         }
       };
       getLoggedUser();
     } else {
-      push("/login");
+      // push("/login");
     }
   }, [push]);
 
@@ -94,5 +97,6 @@ export const useData = (): DataContextType => {
   if (!context) {
     throw new Error("data doesnt exists");
   }
+
   return context;
 };
