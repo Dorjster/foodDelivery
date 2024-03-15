@@ -5,16 +5,20 @@ import Image from "next/image";
 import { Grid, Box, Stack } from "@mui/material";
 import { Deatch } from "@/components/homep/Detail";
 import { Offsale } from "@/components/homep/Offsale";
-import { Foods } from "@/components/homep/foods";
+import { Foods } from "@/components/homep/Foods";
+import React from "react";
 
 export default function Home() {
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   return (
     <Stack sx={{ display: "flex", justifyContent: "center" }}>
       <Stack>
         <Stack
           sx={{
             width: "100vw",
-            height: "1060px",
+            height: "860px",
             position: "relative",
             marginTop: "40px",
           }}
@@ -30,6 +34,7 @@ export default function Home() {
           }}
         >
           <Deatch />
+          <Foods handleOpen={handleOpen} />
         </div>
       </Stack>
     </Stack>

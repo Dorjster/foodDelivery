@@ -13,7 +13,7 @@ export const Detail = (props: PropsType) => {
   return (
     <Stack
       sx={{
-        width: "320px",
+        width: "290px",
         height: "165px",
 
         flexBasis: 300,
@@ -96,14 +96,16 @@ export const Deatch = () => {
     <Stack
       direction="row"
       sx={{
+        display: "flex",
+        width: "98%",
         alignItems: "center",
-        gap: "125px",
+        gap: "82px",
         justifyContent: "center",
         flexWrap: "wrap",
       }}
     >
       {data?.map((el, index) => (
-        <div key={index}>
+        <div key={index} style={{}}>
           <Detail icon={el.icon} text1={el.text1} text2={el.text2} />
         </div>
       ))}

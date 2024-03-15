@@ -10,7 +10,8 @@ import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import ShoppingBasketOutlinedIcon from "@mui/icons-material/ShoppingBasketOutlined";
 import { useRouter } from "next/navigation";
 import { useData } from "../../context/dataProvider";
-
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import PersonIcon from "@mui/icons-material/Person";
 export const HeaderRight = () => {
   const { push } = useRouter();
   const { userData } = useData();
@@ -65,7 +66,7 @@ export const HeaderRight = () => {
           fontWeight: "700px",
         }}
       >
-        <ShoppingBasketOutlinedIcon sx={{ fontSize: "30px" }} />
+        <ShoppingCartIcon sx={{ fontSize: "30px" }} />
         <Box>Сагс</Box>
       </Stack>
       {userData ? (
@@ -85,13 +86,19 @@ export const HeaderRight = () => {
             fontWeight: "700px",
           }}
         >
-          <PersonOutlineIcon sx={{ fontSize: "30px" }} />
+          <PersonIcon sx={{ fontSize: "30px" }} />
           <Button
             onClick={() => {
               push("/userProfile");
             }}
-            sx={{ fontWeight: "700px", color: "black", padding: "5px" }}
+            sx={{
+              fontWeight: "700px",
+              color: "black",
+              padding: "5px",
+              width: "100px",
+            }}
           >
+            {" "}
             {userData.name}
           </Button>
         </Stack>
