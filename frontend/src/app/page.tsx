@@ -5,7 +5,7 @@ import Image from "next/image";
 import { Grid, Box, Stack } from "@mui/material";
 import { Deatch } from "@/components/homep/Detail";
 import { Offsale } from "@/components/homep/Offsale";
-import { Foods } from "@/components/homep/Foods";
+import { Foods } from "@/components/homep/foods";
 import React from "react";
 
 export default function Home() {
@@ -23,7 +23,7 @@ export default function Home() {
             marginTop: "40px",
           }}
         >
-          <Image src="/home.png" alt="" layout="fill" />
+          <Image src="/Desktop - 43.png" alt="" layout="fill" />
         </Stack>
         <div
           style={{

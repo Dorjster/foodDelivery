@@ -42,15 +42,15 @@ export const Food = ({ foods }: AllFoodsProps) => {
     setFoundFood(filteredFood as FoodType);
   };
 
-  const [num, setNum] = useState(12);
-  const [moreButton, setMoreButton] = useState(false);
+  const [num, setNum] = useState(8);
+  const [moreButton, setMoreButton] = useState(true);
 
   const handlerMore = () => {
     if (moreButton) {
       setNum(foods.length);
       setMoreButton(false);
     } else {
-      setNum(12);
+      setNum(8);
       setMoreButton(true);
     }
   };
