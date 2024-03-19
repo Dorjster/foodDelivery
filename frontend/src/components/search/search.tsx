@@ -1,15 +1,11 @@
 "use client";
-
-import { MouseEvent, useState } from "react";
-import { Details } from "./Modal";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import Button from "@mui/material/Button";
-
-import { Stack, Box } from "@mui/material";
+import { Stack } from "@mui/material";
 import Image from "next/image";
-
-import Modal from "@mui/material/Modal";
+import { MouseEvent, useState } from "react";
+import { Details } from "../homep/Modal";
+import { Modal, Button } from "@mui/material";
 import ClearIcon from "@mui/icons-material/Clear";
+// import  from "@mui/material";
 
 const style = {
   position: "absolute" as "absolute",
@@ -23,126 +19,101 @@ const style = {
   borderRadius: "16px",
   backgroundColor: "white",
 };
+type IntrinsicAttributes = any;
 
-type AllFoodsProps = {
-  foods: FoodType[];
+type ALL = {
+  data: FoodType[] & IntrinsicAttributes;
 };
+export const Searched = (props: ALL) => {
+  const { data } = props;
 
-export const Food = ({ foods }: AllFoodsProps) => {
   const [foundFood, setFoundFood] = useState<FoodType | null>(null);
   const [open, setOpenModal] = useState<boolean>(false);
   const handleClose = () => setOpenModal(false);
-  let [count, setCount] = useState(1);
+
   const handleModalClick = () => setOpenModal(!open);
-
+  console.log(data);
   const handleFoodClick = (event: MouseEvent<HTMLDivElement>) => {
-    const foodId = event.currentTarget.id;
-    const filteredFood = foods.find(({ _id }) => _id === foodId);
-    handleModalClick();
+    const food = event.currentTarget.id;
+    console.log(food);
+    const filteredFood = data.find((el) => el._id === food);
     setFoundFood(filteredFood as FoodType);
+    handleModalClick();
+    console.log(filteredFood);
   };
 
-  const [all, setAll] = useState(8);
-  const [moreButton, setMoreButton] = useState(true);
-
-  const handleMore = () => {
-    if (moreButton) {
-      setAll(foods.length);
-      setMoreButton(false);
-    } else {
-      setAll(8);
-      setMoreButton(true);
-    }
-  };
-  const handleCount = () => {
-    count = count + 1;
-    setCount(count);
-  };
-  const handleMinus = () => {
-    count = count - 1;
-    setCount(count);
-  };
+  // const handleFoodClick = (event: MouseEvent<HTMLDivElement>) => {
+  //   const foodId = event.currentTarget.id;
+  //   console.log(foodId);
+  //   const filteredFood = data.find((el) => el._id === foodId);
+  //   if (filteredFood) {
+  //     setFoundFood(filteredFood);
+  //     handleModalClick();
+  //     console.log(filteredFood);
+  //   } else {
+  //     console.log("Food not found");
+  //   }
+  // };
 
   return (
-    <div style={{ width: "90%", display: "flex", flexDirection: "column" }}>
+    <Stack>
       <Stack
         direction="row"
         sx={{
-          width: "95%",
-          marginBottom: "20px",
-          marginLeft: "150px",
-        }}
-      >
-        <Box
-          sx={{
-            display: "flex",
-            gap: "20px",
-            width: "80%",
-          }}
-        >
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <Image alt="" src="/Star 1.png" width={40} height={40} />
-          </Box>
-          <Box
-            sx={{
-              fontSize: "20px",
-              fontFamily: "sans-serif",
-              fontWeight: "bold",
-            }}
-          >
-            Main Foods
-          </Box>
-        </Box>
-        <Box
-          sx={{
-            fontSize: "23px",
-            fontFamily: "sans-serif",
-            color: "#18BA51",
-            display: "flex",
-            alignItems: "center",
-            gap: "10px",
-            marginBottom: "10px",
-          }}
-          onClick={handleMore}
-        >
-          {moreButton ? `See all ${"    "} >` : `< ${"     "} Undo`}
-
-          {/* <ArrowForwardIosIcon /> */}
-        </Box>
-         
-      </Stack>
-      <Stack
-        direction="row"
-        sx={{
-          gap: "10px",
+          width: "100%",
           flexWrap: "wrap",
           display: "flex",
           justifyContent: "center",
         }}
       >
-        {foods?.slice(0, all).map((el: FoodType, index: number) => (
-          <div
-            style={{ width: "400px" }}
-            key={index}
-            onClick={handleFoodClick}
-            id={el._id}
-          >
-            <Details zurag={el.image} text={el.name} une={el.price} />
+        {data.length > 0 ? (
+          <div>
+            <Stack
+              direction="row"
+              sx={{
+                gap: "30px",
+                flexWrap: "wrap",
+                display: "flex",
+                justifyContent: "center",
+                marginTop: "30px",
+                marginBottom: "90px",
+              }}
+            >
+              {data?.map((el: FoodType, index: number) => (
+                <div key={index} id={el._id} onClick={handleFoodClick}>
+                  <Details zurag={el.image} text={el.name} une={el.price} />
+                </div>
+              ))}
+            </Stack>
           </div>
-        ))}
+        ) : (
+          <Stack
+            sx={{
+              alignItems: "center",
+              justifyContent: "center",
+              padding: "170px 100px",
+            }}
+          >
+            <Image alt="" src="/non.png" width={133} height={133} />
+            <div
+              style={{
+                fontFamily: "sans-serif",
+                fontSize: "20px",
+                color: "grey",
+                marginTop: "30px",
+              }}
+            >
+              Уучлаарай олдсонгүй...
+            </div>
+          </Stack>
+        )}
       </Stack>
 
       <Modal open={open} onClose={handleClose}>
         <div style={style}>
           <Stack direction="row" sx={{ padding: "10px" }}>
             <div
-              style={{ width: "505px", height: "502px", position: "relative" }}
+              style={{ width: "535px", height: "502px", position: "relative" }}
             >
               {foundFood?.image && (
                 <Image
@@ -216,7 +187,6 @@ export const Food = ({ foods }: AllFoodsProps) => {
                   style={{ display: "flex", justifyContent: "space-between" }}
                 >
                   <Button
-                    onClick={handleMinus}
                     sx={{
                       backgroundColor: "#18BA51",
                       color: "white",
@@ -225,9 +195,8 @@ export const Food = ({ foods }: AllFoodsProps) => {
                   >
                     -
                   </Button>
-                  <div style={{ fontFamily: "sans-serif" }}>{count}</div>
+                  <div style={{ fontFamily: "sans-serif" }}>1</div>
                   <Button
-                    onClick={handleCount}
                     sx={{
                       backgroundColor: "#18BA51",
                       color: "white",
@@ -251,6 +220,6 @@ export const Food = ({ foods }: AllFoodsProps) => {
           </Stack>
         </div>
       </Modal>
-    </div>
+    </Stack>
   );
 };

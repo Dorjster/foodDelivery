@@ -26,7 +26,7 @@ export const Details = (props: PropsType) => {
         src={zurag}
         width={358}
         height={255}
-        style={{ borderRadius: "16px" }}
+        style={{ borderRadius: "16px", boxShadow: "10px 20px 25px #D6D8DB" }}
       />
       <Stack sx={{}}>
         <Stack

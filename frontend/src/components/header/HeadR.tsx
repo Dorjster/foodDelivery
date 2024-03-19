@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useContext } from "react";
 import Paper from "@mui/material/Paper";
 import InputBase from "@mui/material/InputBase";
 import IconButton from "@mui/material/IconButton";
@@ -9,15 +11,25 @@ import { Button, Grid } from "@mui/material";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import ShoppingBasketOutlinedIcon from "@mui/icons-material/ShoppingBasketOutlined";
 import { useRouter } from "next/navigation";
+import { SearchContext } from "../../context/search";
 import { useData } from "../../context/dataProvider";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import PersonIcon from "@mui/icons-material/Person";
 export const HeaderRight = () => {
   const { push } = useRouter();
   const { userData } = useData();
+  const { search, setSearch } = useContext(SearchContext);
 
   const handlePush = () => {
     push("/login");
+  };
+
+  const handler = () => {
+    if (search === "") {
+      push("/");
+    } else {
+      push(`/search?id=${search}`);
+    }
   };
 
   return (
@@ -43,13 +55,14 @@ export const HeaderRight = () => {
           marginTop: "20px",
         }}
       >
-        <IconButton sx={{ p: "10px" }} aria-label="search">
+        <IconButton sx={{ p: "10px" }} aria-label="search" onClick={handler}>
           <Search />
         </IconButton>
         <InputBase
           sx={{ ml: 1, flex: 1 }}
           placeholder="Хайх "
           inputProps={{ "aria-label": "search google maps" }}
+          onChange={(e) => setSearch(e.target.value)}
         />
       </Paper>
       <Stack
