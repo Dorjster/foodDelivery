@@ -25,4 +25,4 @@ const FoodSchema = new Schema<FoodModelType>(
 );
 
 export const foodModel: Model<FoodModelType> =
-  models["Foods"] || model("foods", FoodSchema);
+  models["Foods"] || model("Foods", FoodSchema);

@@ -5,7 +5,6 @@ import { MouseEvent, useState } from "react";
 import { Details } from "../homep/Modal";
 import { Modal, Button } from "@mui/material";
 import ClearIcon from "@mui/icons-material/Clear";
-// import  from "@mui/material";
 
 const style = {
   position: "absolute" as "absolute",
@@ -27,34 +26,36 @@ type ALL = {
 export const Searched = (props: ALL) => {
   const { data } = props;
 
+  let [count, setCount] = useState(1);
+
   const [foundFood, setFoundFood] = useState<FoodType | null>(null);
+
   const [open, setOpenModal] = useState<boolean>(false);
+
   const handleClose = () => setOpenModal(false);
 
   const handleModalClick = () => setOpenModal(!open);
-  console.log(data);
+
   const handleFoodClick = (event: MouseEvent<HTMLDivElement>) => {
     const food = event.currentTarget.id;
-    console.log(food);
-    const filteredFood = data.find((el) => el._id === food);
+
+    const filteredFood = data.find((ele) => ele._id === food);
+
     setFoundFood(filteredFood as FoodType);
+
     handleModalClick();
-    console.log(filteredFood);
   };
-
-  // const handleFoodClick = (event: MouseEvent<HTMLDivElement>) => {
-  //   const foodId = event.currentTarget.id;
-  //   console.log(foodId);
-  //   const filteredFood = data.find((el) => el._id === foodId);
-  //   if (filteredFood) {
-  //     setFoundFood(filteredFood);
-  //     handleModalClick();
-  //     console.log(filteredFood);
-  //   } else {
-  //     console.log("Food not found");
-  //   }
-  // };
-
+  const handleCount = () => {
+    count = count + 1;
+    setCount(count);
+  };
+  const handleMinus = () => {
+    count = count - 1;
+    if (count <= 0) {
+      count = 1;
+    }
+    setCount(count);
+  };
   return (
     <Stack>
       <Stack
@@ -187,6 +188,7 @@ export const Searched = (props: ALL) => {
                   style={{ display: "flex", justifyContent: "space-between" }}
                 >
                   <Button
+                    onClick={handleMinus}
                     sx={{
                       backgroundColor: "#18BA51",
                       color: "white",
@@ -195,8 +197,9 @@ export const Searched = (props: ALL) => {
                   >
                     -
                   </Button>
-                  <div style={{ fontFamily: "sans-serif" }}>1</div>
+                  <div style={{ fontFamily: "sans-serif" }}>{count}</div>
                   <Button
+                    onClick={handleCount}
                     sx={{
                       backgroundColor: "#18BA51",
                       color: "white",

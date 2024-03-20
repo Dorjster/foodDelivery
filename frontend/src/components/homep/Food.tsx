@@ -60,6 +60,9 @@ export const Food = ({ foods }: AllFoodsProps) => {
   };
   const handleMinus = () => {
     count = count - 1;
+    if (count <= 0) {
+      count = 1;
+    }
     setCount(count);
   };
 

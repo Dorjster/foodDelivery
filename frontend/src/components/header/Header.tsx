@@ -62,7 +62,7 @@ export const Header = () => {
         >
           <Button
             onClick={() => {
-              push("/");
+              push("/menu");
             }}
             sx={{
               color: "black",
