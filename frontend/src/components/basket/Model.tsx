@@ -14,9 +14,10 @@ type OrderDetail = {
   name: string;
   ingredient: string[];
   id: any;
+  deleteMe: (event: MouseEvent<HTMLDivElement>) => void;
 };
 export const Model = (props: OrderDetail) => {
-  const { price, image, name, ingredient, id } = props;
+  const { price, image, name, ingredient, id, deleteMe } = props;
 
   const [test, setTest] = useState<any>([]);
   //   console.log(test);
@@ -33,7 +34,13 @@ export const Model = (props: OrderDetail) => {
   return (
     <div style={{ display: "flex", gap: "10px" }}>
       <div>
-        <Image alt="" src={image} width={240} height={150} />
+        <Image
+          alt=""
+          src={image}
+          width={240}
+          height={150}
+          style={{ borderRadius: "5px" }}
+        />
       </div>
       <div
         style={{
@@ -41,6 +48,7 @@ export const Model = (props: OrderDetail) => {
           display: "flex",
           flexDirection: "column",
           gap: "5px",
+          justifyContent: "space-between",
         }}
       >
         <div
@@ -52,10 +60,10 @@ export const Model = (props: OrderDetail) => {
           }}
         >
           <div>
-            <div>{name}</div>
-            <div style={{ color: "green" }}>{price}$</div>
+            <div style={{ marginBottom: "20px" }}>{name}</div>
+            <div style={{ color: "#18BA51" }}>{price}₮</div>
           </div>
-          <div id={id} style={{ cursor: "pointer" }}>
+          <div onClick={deleteMe} id={id} style={{ cursor: "pointer" }}>
             <ClearOutlinedIcon />
           </div>
         </div>
@@ -70,7 +78,7 @@ export const Model = (props: OrderDetail) => {
           <Button
             style={{
               padding: "6px 6px",
-              backgroundColor: "green",
+              backgroundColor: "#18BA51",
               color: "white",
             }}
           >
@@ -80,7 +88,7 @@ export const Model = (props: OrderDetail) => {
           <Button
             style={{
               padding: "6px 0px",
-              backgroundColor: "green",
+              backgroundColor: "#18BA51",
               color: "white",
             }}
           >

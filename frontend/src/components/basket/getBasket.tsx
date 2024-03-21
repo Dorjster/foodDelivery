@@ -27,6 +27,13 @@ export const Order = () => {
   //     localStorage.setItem("foods", JSON.stringify(newItems)); // Update the localStorage key
   //     setLocalData(newItems);
   //   };
+  const deleteMe = (event: MouseEvent<HTMLDivElement>) => {
+    const foodId = event.currentTarget.id;
+
+    const newItem = itemsBasket.filter((el: any) => el._id !== foodId);
+    localStorage.setItem("foods", JSON.stringify(newItem));
+    setLocalData(newItem);
+  };
 
   return (
     <div style={{ display: "flex", gap: "10px", flexDirection: "column" }}>
@@ -36,6 +43,7 @@ export const Order = () => {
             <div key={index}>
               <Model
                 id={el._id}
+                deleteMe={deleteMe}
                 price={el.price}
                 image={el.image}
                 name={el.name}

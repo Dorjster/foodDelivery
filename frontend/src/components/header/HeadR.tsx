@@ -161,7 +161,7 @@ export const HeaderRight = () => {
         </Stack>
       )}
       <Drawer anchor="right" open={isDrawerOpen} onClose={toggleDrawer}>
-        <Box sx={{ width: 450, padding: "20px" }}>
+        <Box sx={{ width: 650, padding: "20px" }}>
           <Stack
             direction="row"
             sx={{
@@ -190,7 +190,7 @@ export const HeaderRight = () => {
           <Stack
             sx={{ height: "100%", overflowY: "scroll", margin: "10px 30px" }}
           >
-            <Order  />
+            <Order />
             {/* <OrderMap setInTotal={setInTotal} /> */}
           </Stack>
 
