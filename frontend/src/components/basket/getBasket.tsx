@@ -5,12 +5,13 @@ import { MouseEvent } from "react";
 import { Model } from "./Model";
 
 // import { ModelForMap } from "./ModelForMap";
-
 type OrderType = {
-  setInTotal: React.Dispatch<React.SetStateAction<number>>;
+  setTotalPrice: React.Dispatch<React.SetStateAction<number>>;
 };
-
-export const Order = () => {
+interface OrderProps {
+  setTotalPrice: React.Dispatch<React.SetStateAction<number>>;
+}
+export const Order: React.FC<OrderProps> = ({ setTotalPrice }) => {
   const [localData, setLocalData] = useState([]);
 
   const itemsBasket = JSON.parse(localStorage.getItem("foods") || "[]");
@@ -19,14 +20,6 @@ export const Order = () => {
   }, [] || [localData]);
   console.log(localData);
 
-  //   const deleteItem = (event: MouseEvent<HTMLDivElement>) => {
-  //     const foodId = event.currentTarget.id;
-  //     const newItems = itemsBasket.filter(
-  //       (el: any) => el.foodId && el.foodId._id !== foodId
-  //     ); // Add a check for foodId existence
-  //     localStorage.setItem("foods", JSON.stringify(newItems)); // Update the localStorage key
-  //     setLocalData(newItems);
-  //   };
   const deleteMe = (event: MouseEvent<HTMLDivElement>) => {
     const foodId = event.currentTarget.id;
 
@@ -34,7 +27,14 @@ export const Order = () => {
     localStorage.setItem("foods", JSON.stringify(newItem));
     setLocalData(newItem);
   };
-
+  useEffect(() => {
+    let price = 0;
+    itemsBasket?.forEach((item: any) => {
+      const num = Number(item.price) * item.quantity;
+      price = price + num;
+    });
+    setTotalPrice(price);
+  }, [itemsBasket, setTotalPrice]);
   return (
     <div style={{ display: "flex", gap: "10px", flexDirection: "column" }}>
       {itemsBasket &&
@@ -47,7 +47,8 @@ export const Order = () => {
                 price={el.price}
                 image={el.image}
                 name={el.name}
-                ingredient={el.ingredients}
+                count={el.quantity}
+                ingredient={el.ingredient}
               />
             </div>
           );

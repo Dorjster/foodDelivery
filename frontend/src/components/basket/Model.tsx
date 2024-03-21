@@ -14,10 +14,11 @@ type OrderDetail = {
   name: string;
   ingredient: string[];
   id: any;
+  count: number;
   deleteMe: (event: MouseEvent<HTMLDivElement>) => void;
 };
 export const Model = (props: OrderDetail) => {
-  const { price, image, name, ingredient, id, deleteMe } = props;
+  const { price, image, name, ingredient, id, deleteMe, count } = props;
 
   const [test, setTest] = useState<any>([]);
   //   console.log(test);
@@ -32,7 +33,16 @@ export const Model = (props: OrderDetail) => {
   //   }, [price, amount]);
 
   return (
-    <div style={{ display: "flex", gap: "10px" }}>
+    <div
+      style={{
+        display: "flex",
+        gap: "10px",
+        boxShadow: "3px 3px 20px #c3c3c3",
+        marginBottom: "20px",
+        paddingBottom: "20px",
+        paddingTop: "20px",
+      }}
+    >
       <div>
         <Image
           alt=""
@@ -61,13 +71,15 @@ export const Model = (props: OrderDetail) => {
         >
           <div>
             <div style={{ marginBottom: "20px" }}>{name}</div>
-            <div style={{ color: "#18BA51" }}>{price}₮</div>
+            <div style={{ color: "#18BA51", fontWeight: "bold" }}>{price}₮</div>
           </div>
           <div onClick={deleteMe} id={id} style={{ cursor: "pointer" }}>
             <ClearOutlinedIcon />
           </div>
         </div>
-        <div style={{ color: "grey" }}>{ingredient}</div>
+        <div style={{ color: "grey", fontFamily: "sans-serif" }}>
+          {ingredient}
+        </div>
         <div
           style={{
             display: "flex",
@@ -77,17 +89,15 @@ export const Model = (props: OrderDetail) => {
         >
           <Button
             style={{
-              padding: "6px 6px",
               backgroundColor: "#18BA51",
               color: "white",
             }}
           >
             <RemoveOutlinedIcon />
           </Button>
-          <div>1</div>
+          <div>{count}</div>
           <Button
             style={{
-              padding: "6px 0px",
               backgroundColor: "#18BA51",
               color: "white",
             }}

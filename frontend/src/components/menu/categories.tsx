@@ -73,7 +73,7 @@ export const CateFoods = ({ categories }: CategoryType) => {
                 cursor: "pointer",
                 border:
                   selectedCategory === category._id
-                    ? "1.5px solid black"
+                    ? "2.5px solid #18BA51 "
                     : "1px solid grey",
                 display: "flex",
                 backgroundColor: "white",

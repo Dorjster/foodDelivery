@@ -23,12 +23,13 @@ export default function RootLayout({
         <div>
           <div className="px-[20px] md:px-[120px]">
             <BasketProvider>
+              {" "}
               <SearchProvider>
                 <DataProvider>
                   <Header />
                   {children} <Footer />
                 </DataProvider>
-              </SearchProvider>
+              </SearchProvider>{" "}
             </BasketProvider>
           </div>
         </div>

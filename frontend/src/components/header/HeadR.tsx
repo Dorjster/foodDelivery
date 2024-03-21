@@ -18,11 +18,22 @@ import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { Order } from "../basket/getBasket";
 
 export const HeaderRight = () => {
+  const [totalPrice, setTotalPrice] = useState<number>(0);
   const { push } = useRouter();
   const { userData } = useData();
   const { search, setSearch } = useContext(SearchContext);
   const { basket, setBasket } = useContext(BasketContext);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const TotalPrice = totalPrice.toString();
+  function addCommaToLastThreeDigits(numberString: string): string {
+    const length = numberString.length;
+    const lastThreeDigits = numberString.substring(length - 3); // Get the last three digits
+    const remainingDigits = numberString.substring(0, length - 3); // Get the remaining digits
+
+    return remainingDigits + "," + lastThreeDigits; // Concatenate with a comma in between
+  }
+  const price = addCommaToLastThreeDigits(TotalPrice);
+  console.log(TotalPrice);
 
   const handlePush = () => {
     push("/login");
@@ -39,7 +50,17 @@ export const HeaderRight = () => {
   const toggleDrawer = () => {
     setIsDrawerOpen(!isDrawerOpen);
   };
-
+  const handleBuy = () => {
+    if (!userData) {
+      alert(
+        "Please make sure login first then buy something you dumbass bitch"
+      );
+      setIsDrawerOpen(false);
+      push("/login");
+      return;
+    }
+    push("/order");
+  };
   return (
     <Grid
       sx={{
@@ -188,16 +209,14 @@ export const HeaderRight = () => {
           </Stack>
 
           <Stack
-            sx={{ height: "100%", overflowY: "scroll", margin: "10px 30px" }}
+            sx={{ height: "80%", overflowY: "scroll", margin: "10px 30px" }}
           >
-            <Order />
-            {/* <OrderMap setInTotal={setInTotal} /> */}
+            <Order setTotalPrice={setTotalPrice} />
           </Stack>
 
           <Stack
             direction="row"
             sx={{
-              marginBottom: "4px",
               width: "100%",
               padding: "40px 0px",
               justifyContent: "space-around",
@@ -212,16 +231,19 @@ export const HeaderRight = () => {
               }}
             >
               <div>Нийт төлөх дүн</div>
-              <div style={{ fontWeight: "bold" }}>34,800₮</div>
+              <div style={{ fontWeight: "bold", color: "#18BA51" }}>
+                {price}₮
+              </div>
             </div>
             <Button
+              onClick={handleBuy}
               sx={{
-                backgroundColor: "green",
+                backgroundColor: "#18BA51",
                 color: "white",
                 padding: "10px 40px",
               }}
             >
-              Захиалга хийх
+              Захиалах
             </Button>
           </Stack>
         </Box>

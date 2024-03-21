@@ -66,7 +66,7 @@ export const Food = ({ foods }: AllFoodsProps) => {
 
       console.log(itemToAdd);
     }
-    setOpenModal(false); // Close the modal after adding to basket
+    setOpenModal(false);
   };
 
   return (
