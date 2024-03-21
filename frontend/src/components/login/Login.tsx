@@ -1,5 +1,5 @@
 "use client";
-import React, { ChangeEvent } from "react";
+import React, { ChangeEvent, useEffect } from "react";
 import { Stack, Box, Paper, InputBase, Button } from "@mui/material";
 import { InputField } from "../signup/Input";
 import { InputPass } from "../signup/InputP";
@@ -18,6 +18,12 @@ export const Login = () => {
     setUserdata({ ...userdata, [name]: value });
   };
 
+  useEffect(() => {
+    if (userData) {
+      push("/");
+    }
+  }, [userData, push]);
+
   const handleClick = async () => {
     try {
       const { data } = await axios.post(
@@ -30,6 +36,7 @@ export const Login = () => {
         setError("Incorrect email or password");
       } else {
         setError("");
+
         localStorage.setItem(`tokenFood`, data);
         push("/");
       }
@@ -95,7 +102,6 @@ export const Login = () => {
             <Box
               sx={{
                 color: "red",
-
                 width: "100%",
                 textAlign: "center",
                 position: "absolute",

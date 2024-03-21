@@ -56,6 +56,22 @@ export const Searched = (props: ALL) => {
     }
     setCount(count);
   };
+
+  const itemsBasket = JSON.parse(localStorage.getItem("foods") || "[]");
+
+  const addToBasket = () => {
+    if (foundFood) {
+      const itemToAdd = { ...foundFood, quantity: count };
+      localStorage.setItem(
+        "foods",
+        JSON.stringify([...itemsBasket, itemToAdd])
+      );
+
+      console.log(itemToAdd);
+    }
+    setOpenModal(false);
+  };
+
   return (
     <Stack>
       <Stack
@@ -210,6 +226,7 @@ export const Searched = (props: ALL) => {
                   </Button>
                 </div>
                 <Button
+                  onClick={addToBasket}
                   sx={{
                     backgroundColor: "#18BA51",
                     color: "white",

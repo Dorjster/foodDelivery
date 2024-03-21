@@ -4,18 +4,23 @@ import { AccountCircle } from "@mui/icons-material";
 import { Avatar, Box, Button, Grid, Stack } from "@mui/material";
 import { Inputs } from "./inputs";
 import { useData } from "../../context/dataProvider";
+import { useRouter } from "next/navigation";
 
 export const Profile = () => {
   const { userData } = useData();
   const firstLetter = userData?.name.charAt(0);
   const [editing, setEditing] = useState(false);
-
+  const { push } = useRouter();
   const handleEditClick = () => {
     setEditing(true);
   };
 
   const handleSaveClick = () => {
     setEditing(false);
+  };
+  const handleLogout = () => {
+    localStorage.removeItem("tokenFood");
+    push("/");
   };
 
   return (
@@ -58,6 +63,7 @@ export const Profile = () => {
           ) : (
             <Button onClick={handleEditClick}>Edit</Button>
           )}
+          <Button onClick={handleLogout}>Log out</Button>
         </Grid>
       </Grid>
     </Stack>

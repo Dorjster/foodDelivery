@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ChangeEvent } from "react";
+import React, { ChangeEvent, useEffect } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
@@ -52,6 +52,12 @@ export const SignUp = () => {
     setUserdata({ ...userdata, [name]: value });
     console.log(userdata);
   };
+
+  useEffect(() => {
+    if (userData) {
+      push("/");
+    }
+  }, [userData, push]);
 
   const handleClick = async (e: any) => {
     e.preventDefault();

@@ -5,6 +5,7 @@ import { Header } from "../components/header/Header";
 import "./globals.css";
 import { DataProvider } from "@/context/dataProvider";
 import { SearchProvider } from "@/context/search";
+import { BasketProvider } from "@/context/basket";
 
 export const metadata: Metadata = {
   title: "Food fucking Delivery",
@@ -21,12 +22,14 @@ export default function RootLayout({
       <body>
         <div>
           <div className="px-[20px] md:px-[120px]">
-            <SearchProvider>
-              <DataProvider>
-                <Header />
-                {children} <Footer />
-              </DataProvider>
-            </SearchProvider>
+            <BasketProvider>
+              <SearchProvider>
+                <DataProvider>
+                  <Header />
+                  {children} <Footer />
+                </DataProvider>
+              </SearchProvider>
+            </BasketProvider>
           </div>
         </div>
       </body>
