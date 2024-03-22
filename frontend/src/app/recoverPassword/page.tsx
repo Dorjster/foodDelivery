@@ -1,4 +1,3 @@
-"use client";
 import { PasswordRec } from "@/components/passrec/PasswordRec";
 import React, { useState } from "react";
 

@@ -28,4 +28,4 @@ UserSchema.index({ email: 1 }, { unique: true });
 UserSchema.index({ phone: 1 }, { unique: true });
 
 export const userModel: Model<UserModelType> =
-  models["Users"] || model("User", UserSchema);
+  models["Users"] || model("Users", UserSchema);

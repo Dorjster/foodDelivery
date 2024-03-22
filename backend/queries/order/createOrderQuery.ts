@@ -1,12 +1,12 @@
 import { Request, Response } from "express";
-import { FoodModel, OrderModel, UserModel } from "../../db";
-import { login } from "../../controllers";
+import { foodModel, OrderModel, userModel } from "../../db";
+
 import { ORDER_PROCESS } from "../../status";
 
 const getfoodPrice = async (foodIds: string[]) => {
   const prices = Promise.all(
     foodIds.map(async (el) => {
-      const result = await FoodModel.findById({ _id: el });
+      const result = await foodModel.findById({ _id: el });
       return result?.price;
     })
   );
@@ -15,10 +15,10 @@ const getfoodPrice = async (foodIds: string[]) => {
 };
 
 export const CreateOrderQuery = async (req: Request) => {
-  const { userId, foods, khoroo, district, apartment } = req.body;
+  const { userId, foods, address, nemelt } = req.body;
 
   try {
-    const isUserExist = await UserModel.findById({ _id: userId });
+    const isUserExist = await userModel.findById({ _id: userId });
     if (!isUserExist) {
       throw new Error("User not found");
     }
@@ -43,18 +43,16 @@ export const CreateOrderQuery = async (req: Request) => {
     );
     console.log(howManyAreThere);
 
-    // console.log(foods, "foods");
     console.log(totalPrice, "totalPrice");
     console.log(sumOfTotalPrice, "sumtotalPrice");
 
     const result = await OrderModel.create({
       userId,
       foods,
-      khoroo,
-      district,
-      apartment,
+      address,
+      nemelt,
       ordernumber: howManyAreThere + 1,
-      totalPrice: sumOfTotalPrice.toString(),
+      totalPrice,
       process: ORDER_PROCESS.PENDING,
     });
     return result;

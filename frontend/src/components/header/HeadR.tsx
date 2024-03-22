@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useContext, useState } from "react";
 import Paper from "@mui/material/Paper";
 import InputBase from "@mui/material/InputBase";
@@ -27,13 +29,12 @@ export const HeaderRight = () => {
   const TotalPrice = totalPrice.toString();
   function addCommaToLastThreeDigits(numberString: string): string {
     const length = numberString.length;
-    const lastThreeDigits = numberString.substring(length - 3); // Get the last three digits
-    const remainingDigits = numberString.substring(0, length - 3); // Get the remaining digits
+    const lastThreeDigits = numberString.substring(length - 3);
+    const remainingDigits = numberString.substring(0, length - 3);
 
-    return remainingDigits + "," + lastThreeDigits; // Concatenate with a comma in between
+    return remainingDigits + "," + lastThreeDigits;
   }
   const price = addCommaToLastThreeDigits(TotalPrice);
-  console.log(TotalPrice);
 
   const handlePush = () => {
     push("/login");
@@ -59,6 +60,7 @@ export const HeaderRight = () => {
       push("/login");
       return;
     }
+    setIsDrawerOpen(false);
     push("/order");
   };
   return (

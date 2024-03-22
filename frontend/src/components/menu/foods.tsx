@@ -54,7 +54,10 @@ export const Food = ({ foods }: AllFoodsProps) => {
     }
     setCount(count);
   };
-  const itemsBasket = JSON.parse(localStorage.getItem("foods") || "[]");
+  const itemsBasket =
+    typeof window !== "undefined"
+      ? JSON.parse(localStorage.getItem("foods") || "[]")
+      : [];
 
   const addToBasket = () => {
     if (foundFood) {

@@ -20,7 +20,20 @@ type OrderDetail = {
 export const Model = (props: OrderDetail) => {
   const { price, image, name, ingredient, id, deleteMe, count } = props;
 
-  const [test, setTest] = useState<any>([]);
+  const [quantity, setQuantity] = useState(count);
+
+  const handleAdd = () => {
+    const newQuantity = quantity + 1;
+    setQuantity(newQuantity);
+  };
+
+  const handleRemove = () => {
+    if (quantity > 1) {
+      const newQuantity = quantity - 1;
+      setQuantity(newQuantity);
+    }
+  };
+
   //   console.log(test);
 
   //   console.log(Number(price) * Number(amount));
@@ -37,7 +50,7 @@ export const Model = (props: OrderDetail) => {
       style={{
         display: "flex",
         gap: "10px",
-        boxShadow: "3px 3px 20px #c3c3c3",
+
         marginBottom: "20px",
         paddingBottom: "20px",
         paddingTop: "20px",
@@ -73,7 +86,11 @@ export const Model = (props: OrderDetail) => {
             <div style={{ marginBottom: "20px" }}>{name}</div>
             <div style={{ color: "#18BA51", fontWeight: "bold" }}>{price}₮</div>
           </div>
-          <div onClick={deleteMe} id={id} style={{ cursor: "pointer" }}>
+          <div
+            onClick={deleteMe}
+            id={id}
+            style={{ cursor: "pointer", marginBottom: "40px" }}
+          >
             <ClearOutlinedIcon />
           </div>
         </div>
@@ -87,23 +104,32 @@ export const Model = (props: OrderDetail) => {
             alignItems: "center",
           }}
         >
-          <Button
+          {/* <Button
+            onClick={handleRemove}
             style={{
               backgroundColor: "#18BA51",
               color: "white",
             }}
           >
             <RemoveOutlinedIcon />
-          </Button>
-          <div>{count}</div>
-          <Button
+          </Button> */}
+          <div
+            style={{
+              fontFamily: "sans-serif",
+              marginBottom: "20px",
+            }}
+          >
+            {count} ширхэг
+          </div>
+          {/* <Button
+            onClick={handleAdd}
             style={{
               backgroundColor: "#18BA51",
               color: "white",
             }}
           >
             <AddIcon />
-          </Button>
+          </Button> */}
         </div>
       </div>
     </div>

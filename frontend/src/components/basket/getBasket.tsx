@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 
 import { MouseEvent } from "react";
 import { Model } from "./Model";
+import { json } from "react-router-dom";
 
 // import { ModelForMap } from "./ModelForMap";
 type OrderType = {
@@ -12,20 +13,20 @@ interface OrderProps {
   setTotalPrice: React.Dispatch<React.SetStateAction<number>>;
 }
 export const Order: React.FC<OrderProps> = ({ setTotalPrice }) => {
-  const [localData, setLocalData] = useState([]);
+  const [data, setData] = useState([]);
 
   const itemsBasket = JSON.parse(localStorage.getItem("foods") || "[]");
   useEffect(() => {
-    setLocalData(itemsBasket);
-  }, [] || [localData]);
-  console.log(localData);
+    setData(itemsBasket);
+  }, []);
+  console.log(data);
 
   const deleteMe = (event: MouseEvent<HTMLDivElement>) => {
     const foodId = event.currentTarget.id;
 
     const newItem = itemsBasket.filter((el: any) => el._id !== foodId);
     localStorage.setItem("foods", JSON.stringify(newItem));
-    setLocalData(newItem);
+    setData(newItem);
   };
   useEffect(() => {
     let price = 0;
@@ -35,10 +36,11 @@ export const Order: React.FC<OrderProps> = ({ setTotalPrice }) => {
     });
     setTotalPrice(price);
   }, [itemsBasket, setTotalPrice]);
+
   return (
     <div style={{ display: "flex", gap: "10px", flexDirection: "column" }}>
       {itemsBasket &&
-        localData?.map((el: any, index: number) => {
+        data?.map((el: any, index: number) => {
           return (
             <div key={index}>
               <Model
