@@ -5,7 +5,7 @@ import { GiveOrder } from "@/components/order/giveOrder";
 import { MakesOrder } from "@/components/order/makeOrder";
 import { Stack } from "@mui/material";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useData } from "@/context/dataProvider";
 
 export interface formData {
@@ -13,35 +13,68 @@ export interface formData {
   foods: string[];
   address: string;
   nemelt: string;
+  une: any;
 }
 function Order() {
+  const { userData } = useData();
+  const [orderPrice, setOrderPrice] = useState<number>(0);
+
+  const handlePriceUpdate = (price: string) => {
+    setOrderPrice(price);
+  };
   const [formData, setFormData] = useState<formData>({
     userId: "",
     foods: [],
     address: "",
     nemelt: "",
+    une: "",
   });
 
   const handleSubmit = async () => {
     try {
-      // const response = await axios.post(
-      //   "http://localhost:8000/order",
-      //   formData
-      // );
+      const response = await axios.post(
+        "http://localhost:8000/order",
+        formData
+      );
       console.log(formData);
     } catch (error) {
       console.error("Error placing order:", error);
     }
   };
-  const { userData } = useData();
-  console.log(userData?._id);
+  const itemsBasket = JSON.parse(localStorage.getItem("foods") || "[]");
 
+  useEffect(() => {
+    const foodIds = itemsBasket.map((item: any) => item._id);
+
+    setFormData({
+      ...formData,
+      userId: userData?._id || "",
+      foods: foodIds,
+      une: orderPrice,
+    });
+  }, [userData]);
+
+  // useEffect(() => {
+  //   setFormData({
+  //     ...formData,
+  //     userId: userData?._id,
+  //   });
+  // }, [userData]);
+
+  // useEffect(() => {
+  //   const foodIds = itemsBasket.map((item: any) => item.foodId);
+  //   setFormData({
+  //     ...formData,
+  //     foods: foodIds,
+  //   });
+  // }, [itemsBasket]);
+
+  localStorage.getItem("items");
   const handleInputChange = (inputData: Partial<formData>) => {
-    if ("userId" in inputData && userData?._id) {
-      setFormData({ ...formData, userId: userData?._id });
-    } else {
-      setFormData({ ...formData, ...inputData });
-    }
+    // if ("userId" in inputData && userData?._id) {
+    //   setFormData({ ...formData, userId: userData?._id });
+    // } else {
+    setFormData({ ...formData, ...inputData });
   };
 
   return (
@@ -68,7 +101,10 @@ function Order() {
           marginTop: "28px",
         }}
       >
-        <GiveOrder handleSubmit={handleSubmit} />
+        <GiveOrder
+          handleSubmit={handleSubmit}
+          updatePrice={handlePriceUpdate}
+        />
       </div>
     </Stack>
   );

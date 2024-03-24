@@ -193,10 +193,6 @@ export const HeaderRight = () => {
               borderBottom: "1px solid black",
             }}
           >
-            <div style={{ cursor: "pointer" }}>
-              <ArrowBackIosIcon />
-            </div>
-
             <div
               style={{
                 textAlign: "center",

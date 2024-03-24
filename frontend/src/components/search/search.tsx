@@ -39,7 +39,7 @@ export const Searched = (props: ALL) => {
   const handleFoodClick = (event: MouseEvent<HTMLDivElement>) => {
     const food = event.currentTarget.id;
 
-    const filteredFood = data.find((ele) => ele._id === food);
+    const filteredFood = data.find((ele: any) => ele._id === food);
 
     setFoundFood(filteredFood as FoodType);
 
@@ -72,6 +72,7 @@ export const Searched = (props: ALL) => {
 
       console.log(itemToAdd);
     }
+    setCount(1);
     setOpenModal(false);
   };
 

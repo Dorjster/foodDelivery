@@ -1,3 +1,4 @@
+"use client";
 import React, { ChangeEvent, useState } from "react";
 import { Stack, Box, Button } from "@mui/material";
 import axios from "axios";
@@ -221,7 +222,7 @@ export const PasswordRec = () => {
                 fontWeight: "bold",
               }}
             >
-              Имэйл амжилттай шинэчлэгдлээ
+              Шинэ нууц үг хийх
             </Box>
             <Stack sx={{ gap: "10px", position: "relative" }}>
               <input

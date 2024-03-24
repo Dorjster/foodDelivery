@@ -81,6 +81,7 @@ export const Food = ({ foods }: AllFoodsProps) => {
 
       console.log(itemToAdd);
     }
+    setCount(1);
     setOpenModal(false);
   };
 

@@ -1,14 +1,12 @@
 "use client";
 import { Stack, Button, Radio } from "@mui/material";
-
-import { MakesOrder } from "./makeOrder";
-import { InputsFields } from "./Input";
 import { Order } from "../basket/getBasket";
 import { useState } from "react";
 
 export const GiveOrder = (props: any) => {
-  const { handleSubmit } = props;
+  const { handleSubmit, updatePrice } = props;
   const [totalPrice, setTotalPrice] = useState<number>(0);
+
   const TotalPrice = totalPrice.toString();
   function addCommaToLastThreeDigits(numberString: string): string {
     const length = numberString.length;
@@ -18,7 +16,10 @@ export const GiveOrder = (props: any) => {
     return remainingDigits + "," + lastThreeDigits;
   }
   const price = addCommaToLastThreeDigits(TotalPrice);
-
+  const updateParentPrice = (price: string) => {
+    updatePrice(price);
+  };
+  updateParentPrice(price);
   return (
     <Stack
       sx={{

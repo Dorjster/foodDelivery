@@ -19,7 +19,6 @@ export const Order: React.FC<OrderProps> = ({ setTotalPrice }) => {
   useEffect(() => {
     setData(itemsBasket);
   }, []);
-  console.log(data);
 
   const deleteMe = (event: MouseEvent<HTMLDivElement>) => {
     const foodId = event.currentTarget.id;

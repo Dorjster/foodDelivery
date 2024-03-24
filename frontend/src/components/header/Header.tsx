@@ -17,9 +17,13 @@ export const Header = () => {
       justifyContent="space-between"
       alignItems="center"
       sx={{
-        height: "60px",
+        height: "90px",
         padding: "0 151px",
         width: "100vw",
+        position: "sticky",
+        top: "0",
+        backgroundColor: "white",
+        zIndex: "1",
       }}
     >
       <Grid
