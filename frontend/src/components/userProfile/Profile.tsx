@@ -22,6 +22,9 @@ export const Profile = () => {
     localStorage.removeItem("tokenFood");
     push("/");
   };
+  const handleHistory = () => {
+    push("/history");
+  };
 
   return (
     <Stack sx={{}}>
@@ -63,6 +66,7 @@ export const Profile = () => {
           ) : (
             <Button onClick={handleEditClick}>Edit</Button>
           )}
+          <Button onClick={handleHistory}>Order History</Button>
           <Button onClick={handleLogout}>Log out</Button>
         </Grid>
       </Grid>

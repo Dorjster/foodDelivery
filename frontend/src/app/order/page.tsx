@@ -7,21 +7,25 @@ import { Stack } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useData } from "@/context/dataProvider";
+import { useRouter } from "next/navigation";
 
 export interface formData {
   userId: string;
   foods: string[];
   address: string;
   nemelt: string;
-  une: any;
+  une: string;
 }
 function Order() {
   const { userData } = useData();
-  const [orderPrice, setOrderPrice] = useState<number>(0);
+  const [orderPrice, setOrderPrice] = useState<string>(" ");
+  const { push } = useRouter();
 
   const handlePriceUpdate = (price: string) => {
     setOrderPrice(price);
   };
+  console.log(orderPrice);
+
   const [formData, setFormData] = useState<formData>({
     userId: "",
     foods: [],
@@ -29,20 +33,6 @@ function Order() {
     nemelt: "",
     une: "",
   });
-
-  const handleSubmit = async () => {
-    try {
-      const response = await axios.post(
-        "http://localhost:8000/order",
-        formData
-      );
-      console.log(formData);
-    } catch (error) {
-      console.error("Error placing order:", error);
-    }
-  };
-  const itemsBasket = JSON.parse(localStorage.getItem("foods") || "[]");
-
   useEffect(() => {
     const foodIds = itemsBasket.map((item: any) => item._id);
 
@@ -54,26 +44,23 @@ function Order() {
     });
   }, [userData]);
 
-  // useEffect(() => {
-  //   setFormData({
-  //     ...formData,
-  //     userId: userData?._id,
-  //   });
-  // }, [userData]);
-
-  // useEffect(() => {
-  //   const foodIds = itemsBasket.map((item: any) => item.foodId);
-  //   setFormData({
-  //     ...formData,
-  //     foods: foodIds,
-  //   });
-  // }, [itemsBasket]);
+  const handleSubmit = async () => {
+    try {
+      const response = await axios.post(
+        "http://localhost:8000/order",
+        formData
+      );
+      localStorage.removeItem("foods");
+      console.log(formData);
+      push("/history");
+    } catch (error) {
+      console.error("Error placing order:", error);
+    }
+  };
+  const itemsBasket = JSON.parse(localStorage.getItem("foods") || "[]");
 
   localStorage.getItem("items");
   const handleInputChange = (inputData: Partial<formData>) => {
-    // if ("userId" in inputData && userData?._id) {
-    //   setFormData({ ...formData, userId: userData?._id });
-    // } else {
     setFormData({ ...formData, ...inputData });
   };
 

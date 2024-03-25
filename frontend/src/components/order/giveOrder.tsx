@@ -1,25 +1,30 @@
 "use client";
 import { Stack, Button, Radio } from "@mui/material";
 import { Order } from "../basket/getBasket";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export const GiveOrder = (props: any) => {
   const { handleSubmit, updatePrice } = props;
   const [totalPrice, setTotalPrice] = useState<number>(0);
 
   const TotalPrice = totalPrice.toString();
-  function addCommaToLastThreeDigits(numberString: string): string {
-    const length = numberString.length;
-    const lastThreeDigits = numberString.substring(length - 3);
-    const remainingDigits = numberString.substring(0, length - 3);
 
-    return remainingDigits + "," + lastThreeDigits;
-  }
-  const price = addCommaToLastThreeDigits(TotalPrice);
-  const updateParentPrice = (price: string) => {
-    updatePrice(price);
-  };
-  updateParentPrice(price);
+  useEffect(() => {
+    // Function to add commas to the last three digits of a number string
+    const addCommaToLastThreeDigits = (numberString: string): string => {
+      const length = numberString.length;
+      const lastThreeDigits = numberString.substring(length - 3);
+      const remainingDigits = numberString.substring(0, length - 3);
+      return remainingDigits + "," + lastThreeDigits;
+    };
+
+    // Format the price with commas
+    const formattedPrice = addCommaToLastThreeDigits(totalPrice.toString());
+
+    // Update the parent component with the formatted price
+    updatePrice(formattedPrice);
+  }, [totalPrice, updatePrice]);
+
   return (
     <Stack
       sx={{
@@ -81,7 +86,10 @@ export const GiveOrder = (props: any) => {
           }}
         >
           <div>Нийт төлөх дүн</div>
-          <div style={{ fontWeight: "bold", color: "#18BA51" }}> {price}₮</div>
+          <div style={{ fontWeight: "bold", color: "#18BA51" }}>
+            {" "}
+            {totalPrice}₮
+          </div>
         </div>
         <Button
           onClick={handleSubmit}
