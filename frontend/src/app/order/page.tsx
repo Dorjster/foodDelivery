@@ -47,7 +47,7 @@ function Order() {
   const handleSubmit = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:8000/order",
+        "https://fooddelivery-pg8c.onrender.com/order",
         formData
       );
       localStorage.removeItem("foods");

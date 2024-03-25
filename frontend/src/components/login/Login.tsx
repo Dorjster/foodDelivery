@@ -27,7 +27,7 @@ export const Login = () => {
   const handleClick = async () => {
     try {
       const { data } = await axios.post(
-        "http://localhost:8000/login",
+        "https://fooddelivery-pg8c.onrender.com/login",
         userdata
       );
       if (data === "User not found") {

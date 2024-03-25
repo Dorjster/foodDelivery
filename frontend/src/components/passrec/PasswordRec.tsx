@@ -28,7 +28,7 @@ export const PasswordRec = () => {
   const handleSendOTP = async () => {
     try {
       const { data } = await axios.post<string>(
-        "http://localhost:8000/forgot-password",
+        "https://fooddelivery-pg8c.onrender.com/forgot-password",
         { email: userdata.email }
       );
       console.log(data);
@@ -47,7 +47,7 @@ export const PasswordRec = () => {
   const handleVerifyOTP = async () => {
     try {
       const { data } = await axios.post<string>(
-        "http://localhost:8000/check-code",
+        "https://fooddelivery-pg8c.onrender.com/check-code",
         { email: userdata.email, code: userdata.otp }
       );
       console.log(data);
@@ -66,7 +66,7 @@ export const PasswordRec = () => {
   const handleUpdatePassword = async () => {
     try {
       const { data } = await axios.post<string>(
-        "http://localhost:8000/updatePass",
+        "https://fooddelivery-pg8c.onrender.com/updatePass",
         { email: userdata.email, password: userdata.newPassword }
       );
       console.log(data);

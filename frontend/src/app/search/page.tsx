@@ -31,7 +31,7 @@ const FilteredFoods = async () => {
 
   try {
     const { data } = await axios.post<FoodType[]>(
-      "http://localhost:8000/foods",
+      "https://fooddelivery-pg8c.onrender.com/foods",
       body
     );
 

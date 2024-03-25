@@ -8,7 +8,7 @@ export type CategoriesType = {
 export const GetAllCategories = async () => {
   try {
     const { data } = await axios.get<CategoriesType[]>(
-      "http://localhost:8000/categories"
+      "https://fooddelivery-pg8c.onrender.com/categories"
     );
 
     return data;

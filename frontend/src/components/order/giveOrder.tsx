@@ -18,10 +18,8 @@ export const GiveOrder = (props: any) => {
       return remainingDigits + "," + lastThreeDigits;
     };
 
-    // Format the price with commas
     const formattedPrice = addCommaToLastThreeDigits(totalPrice.toString());
 
-    // Update the parent component with the formatted price
     updatePrice(formattedPrice);
   }, [totalPrice, updatePrice]);
 

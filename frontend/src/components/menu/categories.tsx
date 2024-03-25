@@ -33,7 +33,7 @@ export const CateFoods = ({ categories }: CategoryType) => {
   const fetchFoods = async (categoryId: string) => {
     try {
       const { data } = await axios.post<DataType>(
-        "http://localhost:8000/category",
+        "https://fooddelivery-pg8c.onrender.com/category",
         {
           id: categoryId,
         }

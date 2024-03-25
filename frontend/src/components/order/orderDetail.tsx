@@ -5,7 +5,6 @@ import { Stack } from "@mui/material";
 
 type Prop = {
   names: string[];
-  amount: string;
 };
 export const Detail = (props: Prop) => {
   const { names } = props;

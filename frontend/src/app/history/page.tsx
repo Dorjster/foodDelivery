@@ -5,7 +5,7 @@ import axios from "axios";
 
 const GetOrder = async () => {
   try {
-    const { data } = await axios.get("http://localhost:8000/get-order");
+    const { data } = await axios.get("https://fooddelivery-pg8c.onrender.com/get-order");
 
     return data;
   } catch (err: AxiosError | any) {

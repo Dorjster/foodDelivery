@@ -53,7 +53,7 @@ export const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
       const getLoggedUser = async () => {
         try {
           const { data } = await axios.get<UserData>(
-            "http://localhost:8000/token",
+            "https://fooddelivery-pg8c.onrender.com/token",
             {
               headers: {
                 Authorization: `Bearer ${accessToken}`,

@@ -73,7 +73,7 @@ export const SignUp = () => {
           setError("Passwords do not match");
         }
         const { data } = await axios.post(
-          "http://localhost:8000/signup",
+          "https://fooddelivery-pg8c.onrender.com/signup",
           userdata
         );
         console.log(data);

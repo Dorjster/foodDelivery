@@ -13,7 +13,7 @@ import axios from "axios";
 export const AllFoods = async () => {
   try {
     const { data } = await axios.post<FoodType[]>(
-      "http://localhost:8000/foods"
+      "https://fooddelivery-pg8c.onrender.com/foods"
     );
 
     return data;
